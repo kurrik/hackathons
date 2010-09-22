@@ -1,0 +1,20 @@
+body {
+  font: 14px Arial;
+}
+
+pre {
+  padding-left: 20px;
+}
+
+pre code {
+  color: #060;
+}
+
+pre.delta code {
+  color: #666;
+}
+
+pre code em {
+  font-style: normal;
+  color: #060;
+}

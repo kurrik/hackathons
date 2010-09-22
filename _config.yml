@@ -4,7 +4,7 @@ lsi:                false
 pygments:           true
 
 # Customizations
-permalink:          none
+permalink:          /:month-:day-:year/:title.html
 auto:               true
 server:             true
 server_port:        7580
