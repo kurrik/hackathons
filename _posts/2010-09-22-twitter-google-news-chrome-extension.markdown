@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Twitter + Google News Chrome Extension
-tags:
+categories:
 - extensions 
 ---
 Test GitHub Page

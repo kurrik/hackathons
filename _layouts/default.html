@@ -4,8 +4,8 @@
     <title>{{ site.title }} {{ page.title }}</title>
   </head>
   <body>
-    {% for tag in page.tags %} 
-      {{ tag }}
+    {% for cat in page.categories %} 
+      {{ cat }}
     {% endfor %}
     {{ content }}
   </body>
