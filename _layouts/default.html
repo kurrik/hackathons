@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ site.title }} {{ page.title }}</title>
+  </head>
+  <body>
+    {% for tag in page.tags %} 
+      {{ tag }}
+    {% endfor %}
+    {{ content }}
+  </body>
+</html>

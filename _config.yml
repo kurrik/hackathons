@@ -1,0 +1,13 @@
+# GitHub Defaults
+safe:               true
+lsi:                false
+pygments:           true
+
+# Customizations
+permalink:          none
+auto:               true
+server:             true
+server_port:        7580
+
+# Template Data
+title:              Hackathons
