@@ -33,8 +33,8 @@ Inside your extension's folder, create a text file called **manifest.json**, and
     }
 
 Note that there are two icons referenced in the manifest file.  You can make your own or use these:
-![](/static/img/sample-128.png)
-![](/static/img/sample-48.png)
+![](../static/img/sample-128.png)
+![](../static/img/sample-48.png)
 
 Put the icons in the same directory as the **manifest.json** file.
 

@@ -4,10 +4,11 @@ lsi:                false
 pygments:           true
 
 # Customizations
-permalink:          /hackathons/:month-:day-:year/:title.html
+permalink:          /:month-:day-:year/:title.html
 auto:               true
 server:             true
 server_port:        7580
 
 # Template Data
 title:              Hackathons
+base_dir:           /hackathons
