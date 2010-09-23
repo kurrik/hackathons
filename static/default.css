@@ -18,3 +18,17 @@ pre code em {
   font-style: normal;
   color: #060;
 }
+
+body {
+  background: #eee;
+  padding: 0;
+  margin: 0;
+}
+
+#wrap {
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+  -webkit-box-shadow: 0 0 4px #000;
+  background: #fff;
+}

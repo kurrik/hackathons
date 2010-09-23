@@ -1,22 +1,23 @@
 ---
 layout: default
 title: Twitter + Google News Chrome Extension
+snippet: We'll be building an extension which mashes up Google News and Twitter trending topics.  If you want to take a look before starting to code, the extension is available in the Chrome Extensions gallery <a href="https://chrome.google.com/extensions/detail/gijhnpblnlmaklpnabpjlngpelkofhih">here</a>
 categories:
 - Chrome extensions
 - html5
 ---
+We'll be building an extension which mashes up Google News and Twitter trending topics.  If you want to take a look before starting to code, the extension is available in the Chrome Extensions gallery here: [https://chrome.google.com/extensions/detail/gijhnpblnlmaklpnabpjlngpelkofhih]()
+
 ## Step 1: Requirements
 
 To write an extension, make sure you have the following installed:
  * Google Chrome
  * A text editor
 
-## Step 2: Writing your first Extension
-
 If you want to use experimental features, you should download a recent nightly build of Chromium.  You can get these for all 3 platforms here:
-[http://build.chromium.org/buildbot/snapshots/]() - just unzip and run the executable inside (it won't overwrite your current Chrome install).
+ [http://build.chromium.org/buildbot/snapshots/]() - just unzip and run the executable inside (it won't overwrite your current Chrome install).
 
-We'll be building an extension which mashes up Google News and Twitter trending topics.  If you want to take a look before starting to code, the extension is available in the Chrome Extensions gallery here: [https://chrome.google.com/extensions/detail/gijhnpblnlmaklpnabpjlngpelkofhih]()
+## Step 2: Writing your first Extension
 
 Create a folder somewhere on your computer to contain your extension's code.
 Inside your extension's folder, create a text file called **manifest.json**, and put this in it:
@@ -32,8 +33,8 @@ Inside your extension's folder, create a text file called **manifest.json**, and
     }
 
 Note that there are two icons referenced in the manifest file.  You can make your own or use these:
-![](http://src.chromium.org/viewvc/chrome/trunk/src/chrome/common/extensions/docs/examples/howto/contentscript_xhr/sample-128.png)
-![](http://src.chromium.org/viewvc/chrome/trunk/src/chrome/common/extensions/docs/examples/howto/contentscript_xhr/sample-48.png)
+![](/static/img/sample-128.png)
+![](/static/img/sample-48.png)
 
 Put the icons in the same directory as the **manifest.json** file.
 
@@ -50,8 +51,8 @@ Add a line to your **manifest.json** file so that it looks like this:
   "icons": {
     "48" : "sample-48.png",
     "128" : "sample-128.png"
-  },
-  <em>"background_page": "background.html"</em>
+  }<em>,
+  "background_page": "background.html"</em>
 }
 </code></pre>
     
@@ -70,7 +71,7 @@ This tells chrome to load **background.html** for your extension, so create a fi
 
 Now if you go to [chrome://extensions]() and click **reload** next to your extension, you should see a link to **background.html** which will open up Chrome's Inspector.  Click the link and make sure that "hello world" is printed in the console.
 
-### Step 4: Add a content script
+## Step 4: Add a content script
 
 Add the following lines to your **manifest.json** so it looks like this:
 
@@ -99,7 +100,7 @@ This will cause **contentscript.js** to be injected into all **news.google.com**
 
 Now if you reload your extension and go to **news.google.com** you should see an alert box.  **Right click** on the page and choose **inspect element**. Then check the console to make sure that "Hello from a content script" was printed there.  Note that this is a different console than the background page!
 
-### Step 5: Send a message to the background page
+## Step 5: Send a message to the background page
 
 Change your **contentscript.js** to the following:
 
@@ -125,7 +126,7 @@ Then change your **background.html** page to this:
 
 **Reload your extension** and go to **news.google.com**.  Check the console for the background page.  You should see the request from the content script in the console.  The content script can now send messages to the background page.
 
-### Step 6: Fetch data from Twitter
+## Step 6: Fetch data from Twitter
 
 Change your **background.html** page to this:
 
@@ -189,7 +190,7 @@ This will attempt to make a request to [http://search.twitter.com/trends/current
 
 Now the request will work.  Check the console to see the response from the API.
 
-### Step 7: Passing data back to the content script:
+## Step 7: Passing data back to the content script:
 
 You need to return the Twitter data to the content script, so we'll add a callback parameter to the function that fetches Twitter data.  Change your **background.html** to:
 
@@ -240,7 +241,7 @@ chrome.extension.sendRequest({'action' : 'fetch'}, onResponse);
 
 Reload the extension and check the content script's console on **news.google.com**.  You should see the Twitter data.
 
-### Step 08: Injecting the data into the page
+## Step 8: Injecting the data into the page
 
 The Twitter data has been returned to the content script, so all there is left to do is put the data into the page.  Change your **contentscript.js** file to the following:
 
@@ -276,9 +277,9 @@ chrome.extension.sendRequest({'action' : 'fetch'}, onResponse);
 
 Congratulations!  You've just build a useful Google Chrome Extension!
 
-### Full source code:
+## Full source code:
 
-#### manifest.json
+### manifest.json
 
     {
       "name": "Twitter + Google News Extension",
@@ -300,7 +301,7 @@ Congratulations!  You've just build a useful Google Chrome Extension!
       ]
     }
     
-#### background.html
+### background.html
 
     <!DOCTYPE html>
     <html>
@@ -338,7 +339,7 @@ Congratulations!  You've just build a useful Google Chrome Extension!
       </body>
     </html>
 
-#### contentscript.js
+### contentscript.js
 
     function onResponse(data) {
       if (data.trends) {
