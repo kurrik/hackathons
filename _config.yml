@@ -8,7 +8,8 @@ permalink:          /:month-:day-:year/:title.html
 auto:               true
 server:             true
 server_port:        7580
+destination:        ./_site/hackathons
 
 # Template Data
 title:              Hackathons
-base_dir:           /hackathons
+url:                http://kurrik.github.com/hackathons
