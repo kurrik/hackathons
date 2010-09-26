@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Font Selector Chrome Extension
-snippet: This codelab will walk you through the steps of building a Google Chrome Extension which will let users change the font of elements on a web page.
+snippet: This codelab will walk you through the steps of building a Google Chrome Extension which will let users change the font of elements on a web page.  You may install the completed extension from the Google Chrome Extensions gallery [here](https://chrome.google.com/extensions/detail/bcpdmdlegeipkagbpefplehebhijpglm)
 categories:
 - chrome extension
 - css3
@@ -16,6 +16,8 @@ We'll be using the following extension APIs:
  * [Context Menus](http://code.google.com/chrome/extensions/contextMenus.html)
  * [Content Scripts](http://code.google.com/chrome/extensions/content_scripts.html)
  * [Browser Actions](http://code.google.com/chrome/extensions/browserAction.html)
+
+You may install the completed extension from the Google Chrome Extensions gallery [here](https://chrome.google.com/extensions/detail/bcpdmdlegeipkagbpefplehebhijpglm)
 
 ## Step 1: Requirements
 
@@ -555,3 +557,5 @@ Here is the source for the final version of the extension:
  *  [fontselector-19-regular.png]({{ site.url }}/static/samples/fontselector/fontselector-19-regular.png)
  *  [manifest.json]({{ site.url }}/static/samples/fontselector/manifest.json)
  *  [selectitem.js]({{ site.url }}/static/samples/fontselector/selectitem.js)
+ 
+You may install the completed extension from the Google Chrome Extensions gallery [here](https://chrome.google.com/extensions/detail/bcpdmdlegeipkagbpefplehebhijpglm)
