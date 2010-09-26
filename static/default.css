@@ -44,3 +44,11 @@ pre code em {
   -webkit-box-shadow: 0 1px 3px #999;
   border: 1px solid #999;
 }
+
+.icontable {
+  margin: 0 auto;
+}
+.icontable td, .icontable th {
+  text-align: center;
+  padding: 5px 20px;
+}

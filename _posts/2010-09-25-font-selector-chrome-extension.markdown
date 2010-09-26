@@ -1,22 +1,12 @@
 ---
 layout: default
 title: Font Selector Chrome Extension
-snippet: 
+snippet: This codelab will walk you through the steps of building a Google Chrome Extension which will let users change the font of elements on a web page.
 categories:
 - chrome extension
 - css3
 - webfonts
 ---
-<style>
-  .icontable {
-    margin: 0 auto;
-  }
-  .icontable td, .icontable th {
-    text-align: center;
-    padding: 5px 20px;
-  }
-</style>
-
 This codelab will walk you through the steps of building a Google Chrome Extension which will let users change the font of elements on a web page.
 
 To make the choice of fonts interesting, the extension will use [CSS3 Webfonts](http://www.w3.org/TR/css3-webfonts/) provided by the [Google Font API](http://code.google.com/apis/webfonts/).

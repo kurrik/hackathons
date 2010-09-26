@@ -33,8 +33,25 @@ Inside your extension's folder, create a text file called **manifest.json**, and
     }
 
 Note that there are two icons referenced in the manifest file.  You can make your own or use these:
-![]({{ site.url }}/static/img/sample-128.png)
-![]({{ site.url }}/static/img/sample-48.png)
+
+<table class="icontable">
+  <tr>
+    <th>sample-128.png</th>
+    <th>sample-48.png</th>
+  </tr>
+  <tr>
+    <td>
+      <img class="bordered" src="{{ site.url }}/static/img/sample-128.png" />
+    </td>
+    <td>
+      <img class="bordered" src="{{ site.url }}/static/img/sample-48.png" />
+    </td>
+  </tr>
+  <tr>
+    <td>128 x 128 px</td>
+    <td>48 x 48 px</td>
+  </tr>
+</table>
 
 Put the icons in the same directory as the **manifest.json** file.
 
