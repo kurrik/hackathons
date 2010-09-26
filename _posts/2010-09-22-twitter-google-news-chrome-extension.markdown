@@ -3,7 +3,7 @@ layout: default
 title: Twitter + Google News Chrome Extension
 snippet: We'll be building an extension which mashes up Google News and Twitter trending topics.  If you want to take a look before starting to code, the extension is available in the Chrome Extensions gallery <a href="https://chrome.google.com/extensions/detail/gijhnpblnlmaklpnabpjlngpelkofhih">here</a>
 categories:
-- Chrome extensions
+- chrome extension
 - html5
 ---
 We'll be building an extension which mashes up Google News and Twitter trending topics.  If you want to take a look before starting to code, the extension is available in the Chrome Extensions gallery here: [https://chrome.google.com/extensions/detail/gijhnpblnlmaklpnabpjlngpelkofhih]()

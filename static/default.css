@@ -1,34 +1,46 @@
 body {
   font: 14px Arial;
-}
-
-pre {
-  padding-left: 20px;
-}
-
-pre code {
-  color: #060;
-}
-
-pre.delta code {
-  color: #666;
-}
-
-pre code em {
-  font-style: normal;
-  color: #060;
-}
-
-body {
-  background: #eee;
+  background: #e9e9e9;
   padding: 0;
   margin: 0;
 }
 
+pre {
+  padding: 10px 10px 10px 20px;
+  border: 1px solid #767ba7;
+  background: #e3e5f3;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+pre code {
+  color: #000;
+}
+
+pre.delta code {
+  color: #767ba7;
+}
+
+pre code em {
+  font-style: normal;
+  color: #000;
+  font-weight: bold;
+}
+
 #wrap {
-  width: 50%;
+  width: 55%;
   margin: 0 auto;
-  padding: 20px;
-  -webkit-box-shadow: 0 0 4px #000;
+  padding: 20px 30px;
+  -webkit-box-shadow: 0 1px 4px #aaa;
   background: #fff;
+}
+
+.centered {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.bordered {
+  -webkit-box-shadow: 0 1px 3px #999;
+  border: 1px solid #999;
 }
