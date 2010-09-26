@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Font Selector Chrome Extension
-snippet: This codelab will walk you through the steps of building a Google Chrome Extension which will let users change the font of elements on a web page.  You may install the completed extension from the Google Chrome Extensions gallery [here](https://chrome.google.com/extensions/detail/bcpdmdlegeipkagbpefplehebhijpglm)
+snippet: This codelab will walk you through the steps of building a Google Chrome Extension which will let users change the font of elements on a web page.  You may install the completed extension from the Google Chrome Extensions gallery <a href="https://chrome.google.com/extensions/detail/bcpdmdlegeipkagbpefplehebhijpglm">here</a>.
 categories:
 - chrome extension
 - css3
