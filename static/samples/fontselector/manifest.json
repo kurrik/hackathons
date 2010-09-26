@@ -1,0 +1,17 @@
+{
+  "name": "Font Selector",
+  "version": "1.0.0",
+  "description": "Replace fonts on a page using Google's Font API.",
+  "background_page" : "background.html",
+  "browser_action" : {
+    "default_icon" : "fontselector-19-regular.png"
+  },
+  "permissions" : [ 
+    "contextMenus",
+    "tabs",
+    "http://*/*"
+  ],
+  "icons": {
+    "128" : "fontselector-128.png"
+  }
+}
