@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      
+      function onImageClick(data, tab) {
+        console.log(data);
+        var winData = {
+          'url': 'popup.html#' + encodeURIComponent(data.srcUrl),
+          'width': 100,
+          'height': 100
+        };
+        chrome.windows.create(winData);
+      };
+      
+      chrome.contextMenus.create({
+        "title" : "Modify this image",
+        "type" : "normal",
+        "contexts" : ["image"],
+        "onclick" : onImageClick
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

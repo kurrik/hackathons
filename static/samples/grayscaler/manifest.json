@@ -1,0 +1,14 @@
+{
+  "name": "Image 'Grayscaler' Extension",
+  "version": "1.0.1",
+  "description": "Select images with the context menu and convert to grayscale.",
+  "icons": {
+    "128" : "sample-128.png"
+  },
+  "background_page": "background.html",
+  "permissions" : [ 
+    "tabs",
+    "contextMenus",
+    "http://*/*"
+  ]
+}

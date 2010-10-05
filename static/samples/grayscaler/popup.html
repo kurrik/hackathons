@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html, body {
+        padding: 0;
+        margin: 0;
+      }
+      
+      #buffer {
+        display: none;
+      }
+    </style>
+    <script>
+      function setWindowSize() {
+        chrome.windows.getCurrent(function(win) {
+          var updateData = {
+            'width': document.body.scrollWidth,
+            'height': document.body.offsetHeight + 100
+          };
+          console.log(updateData);
+          chrome.windows.update(win.id, updateData);
+        });
+      };
+      
+      function paintGrayscale(threshold) {
+        if (!threshold) {
+          threshold = 1;
+        }
+        
+        var buffer = document.querySelector('#buffer');
+        var bufferContext = buffer.getContext('2d');
+        
+        var output = document.querySelector('#output');
+        var outputContext = output.getContext('2d');
+        output.width = buffer.width;
+        output.height = buffer.height;
+        
+        var imagedata = bufferContext.getImageData(0, 0, 
+                                                   buffer.width, buffer.height);
+            
+        for (var i = 0; i < imagedata.data.length; i += 4) {
+          var r = imagedata.data[i];
+          var g = imagedata.data[i + 1];
+          var b = imagedata.data[i + 2];
+          
+          var gray = (0.3 * r) + (0.59 * g) + (0.11 * b);
+          gray = Math.round(gray / threshold) * threshold;
+          gray = Math.max(Math.min(gray, 255), 0);
+          imagedata.data[i] = gray;
+          imagedata.data[i + 1] = gray;
+          imagedata.data[i + 2] = gray;
+        }
+        outputContext.putImageData(imagedata, 0, 0);
+      };
+      
+      function onImageLoaded(evt) {
+        var canvas = document.querySelector('#buffer');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        
+        var context = canvas.getContext('2d');
+        context.drawImage(this, 0, 0);
+        
+        paintGrayscale();
+        window.setTimeout(setWindowSize, 10);
+      };
+      
+      function onChange(evt) {
+        paintGrayscale(parseInt(this.value));
+      };
+      
+      function onLoad(evt) {
+        var imgUrl = decodeURIComponent(window.location.hash.substring(1));
+        
+        var img = document.createElement('image');
+        img.addEventListener('load', onImageLoaded, false);
+        img.src = imgUrl;
+        
+        var input = document.querySelector('input[type="range"]');
+        input.addEventListener('change', onChange, false);
+      };
+      
+      window.addEventListener('load', onLoad, false);
+    </script>
+  </head>
+  <body>
+    <canvas id="buffer"></canvas>
+    <canvas id="output"></canvas>
+    <input type="range" min="1" max="255" value="1"/>
+  </body>
+</html>
