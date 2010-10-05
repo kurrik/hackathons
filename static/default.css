@@ -58,3 +58,16 @@ pre code cite {
   text-align: center;
   padding: 5px 20px;
 }
+
+.shortlink {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  border: 2px solid #0d0;
+  background: #afa;
+  border-radius: 20px;
+  font: 18px Arial;
+  padding: 10px;
+  color: #000;
+  text-decoration: none;
+}

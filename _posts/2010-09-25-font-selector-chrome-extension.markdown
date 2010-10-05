@@ -259,9 +259,9 @@ function setStyleList(elem, styles) {
       elem.style.setProperty(name, styles[name]);
     }
   }
-};</code></pre>
+};
 
-window.addEventListener('mousemove', onMouseMove, true);
+window.addEventListener('mousemove', onMouseMove, true);</code></pre>
     
 Now when you click the browser action icon and move the mouse over the current
 page, the page element below the mouse will be highlighted:

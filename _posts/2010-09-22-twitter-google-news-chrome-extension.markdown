@@ -6,7 +6,7 @@ categories:
 - chrome extension
 - html5
 ---
-We'll be building an extension which mashes up Google News and Twitter trending topics.  If you want to take a look before starting to code, the extension is available in the Chrome Extensions gallery here: [https://chrome.google.com/extensions/detail/gijhnpblnlmaklpnabpjlngpelkofhih]()
+We'll be building an extension which mashes up Google News and Twitter trending topics.  If you want to take a look before starting to code, the extension is available in the Chrome Extensions gallery here: <https://chrome.google.com/extensions/detail/gijhnpblnlmaklpnabpjlngpelkofhih>
 
 ## Step 1: Requirements
 
@@ -15,7 +15,7 @@ To write an extension, make sure you have the following installed:
  * A text editor
 
 If you want to use experimental features, you should download a recent nightly build of Chromium.  You can get these for all 3 platforms here:
- [http://build.chromium.org/buildbot/snapshots/]() - just unzip and run the executable inside (it won't overwrite your current Chrome install).
+ <http://build.chromium.org/buildbot/snapshots/> - just unzip and run the executable inside (it won't overwrite your current Chrome install).
 
 ## Step 2: Writing your first Extension
 
@@ -55,7 +55,7 @@ Note that there are two icons referenced in the manifest file.  You can make you
 
 Put the icons in the same directory as the **manifest.json** file.
 
-When you're done, go to [chrome://extensions]() in Google Chrome and click **developer mode**.  Then click load unpacked extension and select your directory.  Your first extension is done!
+When you're done, go to <chrome://extensions> in Google Chrome and click **developer mode**.  Then click load unpacked extension and select your directory.  Your first extension is done!
 
 ## Step 3: Add a background page
 
@@ -86,7 +86,7 @@ This tells chrome to load **background.html** for your extension, so create a fi
       </body>
     </html>
 
-Now if you go to [chrome://extensions]() and click **reload** next to your extension, you should see a link to **background.html** which will open up Chrome's Inspector.  Click the link and make sure that "hello world" is printed in the console.
+Now if you go to <chrome://extensions> and click **reload** next to your extension, you should see a link to **background.html** which will open up Chrome's Inspector.  Click the link and make sure that "hello world" is printed in the console.
 
 ## Step 4: Add a content script
 
@@ -183,7 +183,7 @@ Change your **background.html** page to this:
       </body>
     </html>
 
-This will attempt to make a request to [http://search.twitter.com/trends/current.json?exclude=hashtags]() to fetch the current trending topics on Twitter.  **This request won't work unless you request permission to fetch this URL**, so change your **manifest.json** to:
+This will attempt to make a request to <http://search.twitter.com/trends/current.json?exclude=hashtags> to fetch the current trending topics on Twitter.  **This request won't work unless you request permission to fetch this URL**, so change your **manifest.json** to:
 
     {
       "name": "Twitter + Google News Extension",
