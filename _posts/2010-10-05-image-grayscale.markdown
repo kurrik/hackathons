@@ -95,6 +95,10 @@ Reload your extension on the <chrome://extensions> page and you will see an
 link for **background.html** listed.  Clicking the link will open the inspector
 for the background page, and you will see your output in the console.
 
+<div class="centered">
+ <img class="bordered" src="{{ site.url }}/static/samples/grayscaler/screen-01.png"/>
+</div>
+
 ## Step 4: Add a Context Menu
 
 In order to modify images on web pages, the user will need a mechanism to 
@@ -138,7 +142,17 @@ The context menus API requires some permissions.  Add the following to your mani
   ]</em>
 }</code></pre>
 
-Now if you reload the extension and right click on an image, you should see a context menu item.  If you click on the menu item, you should see an object containing contextual information about the image in the background page's console.
+Now if you reload the extension and right click on an image, you should see a context menu item.  
+
+<div class="centered">
+ <img class="bordered" src="{{ site.url }}/static/samples/grayscaler/screen-02.png"/>
+</div>
+
+If you click on the menu item, you should see an object containing contextual information about the image in the background page's console.
+
+<div class="centered">
+ <img class="bordered" src="{{ site.url }}/static/samples/grayscaler/screen-03.png"/>
+</div>
 
 ## Step 5: Open a Popup
 
@@ -199,6 +213,10 @@ Finally, create a file named *popup.html* so that we have something to show:
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
+<div class="centered">
+ <img class="bordered" src="{{ site.url }}/static/samples/grayscaler/screen-04.png"/>
+</div>
+
 ## Step 6: Load the Image
 
 The popup window will need to load the image into an `<img>` element before we can draw it into a canvas. Change your *popup.html*:
@@ -243,6 +261,10 @@ The popup window will need to load the image into an `<img>` element before we c
 &lt;/html&gt;</code></pre>
 
 Now when the popup is opened, you should see the image in the popup body.
+
+<div class="centered">
+ <img class="bordered" src="{{ site.url }}/static/samples/grayscaler/screen-05.png"/>
+</div>
 
 ## Step 7: Modify the Image
 
@@ -296,6 +318,12 @@ function onImageLoaded(evt) {
   window.setTimeout(setWindowSize, 10);
 };
 </code></pre>
+
+Now when you activate the popup (or reload it) the image will be grayscale.
+
+<div class="centered">
+ <img class="bordered" src="{{ site.url }}/static/samples/grayscaler/screen-06.png"/>
+</div>
 
 ## Step 8: Add a Slider
 
@@ -359,12 +387,16 @@ function onLoad(evt) {
 
 Now you're able to offer some customization to your extension!
 
+<div class="centered">
+ <img class="bordered" src="{{ site.url }}/static/samples/grayscaler/screen-07.png"/>
+</div>
+
 ## Suggested Improvements
 
-  * Allow a user to drag a copy of the image onto their Desktop to save it.
-  * Add additional controls for contrast.
-  * Save control state in `localStorage`.
-  * Implement a different visual effect to the original image.
+ * Allow a user to drag a copy of the image onto their Desktop to save it.
+ * Add additional controls for contrast.
+ * Save control state in `localStorage`.
+ * Implement a different visual effect to the original image.
 
 ## Final Source Code
 
