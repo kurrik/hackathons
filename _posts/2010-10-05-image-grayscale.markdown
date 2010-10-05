@@ -91,11 +91,16 @@ Create a new file named **background.html** with the following code:
       </body>
     </html>
 
-Reload your extension on the [chrome://extensions]() page and you will see an
+Reload your extension on the <chrome://extensions> page and you will see an
 link for **background.html** listed.  Clicking the link will open the inspector
 for the background page, and you will see your output in the console.
 
 ## Step 4: Add a Context Menu
+
+In order to modify images on web pages, the user will need a mechanism to 
+select an image.  Luckily, the [context menus](http://code.google.com/chrome/extensions/contextMenus.html) API will give us a quick way to access the URL of an image on the page. 
+
+Start by modifying your background page to register a context menu item:
 
 <pre class="delta"><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -117,6 +122,8 @@ for the background page, and you will see your output in the console.
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
+The context menus API requires some permissions.  Add the following to your manifest:
+
 <pre class="delta"><code>{
   "name": "Image 'Grayscaler' Extension",
   "version": "1.0.1",
@@ -131,7 +138,11 @@ for the background page, and you will see your output in the console.
   ]</em>
 }</code></pre>
 
+Now if you reload the extension and right click on an image, you should see a context menu item.  If you click on the menu item, you should see an object containing contextual information about the image in the background page's console.
+
 ## Step 5: Open a Popup
+
+The user interface for this extension is a popup window.  Modify your `onImageClick` function to open a new window when the context menu is activated:
 
 <pre class="delta"><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -140,8 +151,8 @@ for the background page, and you will see your output in the console.
       function onImageClick(data, tab) {
         <em>var winData = {
           &#x27;url&#x27;: &#x27;popup.html#&#x27; + encodeURIComponent(data.srcUrl),
-          &#x27;width&#x27;: 100,
-          &#x27;height&#x27;: 100
+          &#x27;width&#x27;: 300,
+          &#x27;height&#x27;: 300
         };
         chrome.windows.create(winData);</em>
       };
@@ -158,6 +169,10 @@ for the background page, and you will see your output in the console.
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
+Note that we are passing the src URL of the image to the popup page via the *location.hash* parameter.  This is a simple way to pass information from the background page to a new window without needing to use the messaging API.
+
+Opening a new window requires the *tabs* permission, so add that to your manifest:
+
 <pre class="delta"><code>{
   "name": "Image 'Grayscaler' Extension",
   "version": "1.0.1",
@@ -173,12 +188,25 @@ for the background page, and you will see your output in the console.
   ]
 }</code></pre>
 
-## Step 6: Load the Image
+Finally, create a file named *popup.html* so that we have something to show:
 
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+## Step 6: Load the Image
+
+The popup window will need to load the image into an `<img>` element before we can draw it into a canvas. Change your *popup.html*:
+
+<pre class="delta"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    <em>&lt;style&gt;
       html, body {
         padding: 0;
         margin: 0;
@@ -208,18 +236,26 @@ for the background page, and you will see your output in the console.
       };
 
       window.addEventListener(&#x27;load&#x27;, onLoad, false);
-    &lt;/script&gt;
+    &lt;/script&gt;</em>
   &lt;/head&gt;
   &lt;body&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
+Now when the popup is opened, you should see the image in the popup body.
+
 ## Step 7: Modify the Image
 
+Once the image is loaded in an `<img>` tag, it can be drawn into a `<canvas>`.  We'll be using two canvases so we can keep the original image pixels in memory while modifying them for output.  The following changes to the code implement a function which renders the image in grayscale.
+  
+First, add the canvas elements:
+
 <pre class="delta"><code>&lt;body&gt;
-  <em>&lt;canvas id=&quot;buffer&quot;&gt;&lt;/canvas&gt;
+  <em>&lt;canvas id=&quot;buffer&quot; style=&quot;display: none&quot;&gt;&lt;/canvas&gt;
   &lt;canvas id=&quot;output&quot;&gt;&lt;/canvas&gt;</em>
 &lt;/body&gt;</code></pre>
+
+Then the `paintGrayscale` function:
 
 <pre class="delta"><code><em>function paintGrayscale() {
   var buffer = document.querySelector('#buffer');
@@ -263,11 +299,15 @@ function onImageLoaded(evt) {
 
 ## Step 8: Add a Slider
 
+We'll add some customizability to the extension, through a "posterization" slider.  For this, a new `&lt;input type="range" /&gt;` element will be useful:
+
 <pre class="delta"><code>&lt;body&gt;
-  &lt;canvas id=&quot;buffer&quot;&gt;&lt;/canvas&gt;
+  &lt;canvas id=&quot;buffer&quot; style=&quot;display: none&quot;&gt;&lt;/canvas&gt;
   &lt;canvas id=&quot;output&quot;&gt;&lt;/canvas&gt;
-  <em>&lt;input type=&quot;range&quot; min=&quot;1&quot; max=&quot;255&quot; value=&quot;1&quot; /&gt;</em>
+  <em>Posterization: &lt;input type=&quot;range&quot; min=&quot;1&quot; max=&quot;255&quot; value=&quot;1&quot; /&gt;</em>
 &lt;/body&gt;</code></pre>
+
+We'll take the value of this slider and use it as a parameter to the `paintGrayscale` image:
 
 <pre class="delta"><code>function paintGrayscale(<em>threshold</em>) {
   <em>if (!threshold) {
@@ -300,6 +340,8 @@ function onImageLoaded(evt) {
   outputContext.putImageData(imagedata, 0, 0);
 };</code></pre>
 
+Next, listen for changes to the slider, and call `paintGrayscale` with the new value when the user manipulates the control:
+
 <pre class="delta"><code><em>function onChange(evt) {
   paintGrayscale(parseInt(this.value));
 };</em>
@@ -314,6 +356,15 @@ function onLoad(evt) {
   <em>var input = document.querySelector('input[type="range"]');
   input.addEventListener('change', onChange, false);</em>
 };</code></pre>
+
+Now you're able to offer some customization to your extension!
+
+## Suggested Improvements
+
+  * Allow a user to drag a copy of the image onto their Desktop to save it.
+  * Add additional controls for contrast.
+  * Save control state in `localStorage`.
+  * Implement a different visual effect to the original image.
 
 ## Final Source Code
 
