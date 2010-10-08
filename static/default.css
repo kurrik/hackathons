@@ -62,11 +62,11 @@ pre code cite {
 .shortlink {
   position: fixed;
   right: 10px;
-  bottom: 10px;
+  top: 10px;
   border: 2px solid #0d0;
   background: #afa;
   border-radius: 20px;
-  font: 18px Arial;
+  font: 22px Arial;
   padding: 10px;
   color: #000;
   text-decoration: none;
