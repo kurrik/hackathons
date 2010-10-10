@@ -327,20 +327,22 @@ Now when you activate the popup (or reload it) the image will be grayscale.
 
 ## Step 8: Add a Slider
 
-We'll add some customizability to the extension, through a "posterization" slider.  For this, a new `&lt;input type="range" /&gt;` element will be useful:
+We'll add some customizability to the extension, through some sliders.  For this, the new `&lt;input type="range" /&gt;` element will be useful:
 
 <pre class="delta"><code>&lt;body&gt;
   &lt;canvas id=&quot;buffer&quot; style=&quot;display: none&quot;&gt;&lt;/canvas&gt;
   &lt;canvas id=&quot;output&quot;&gt;&lt;/canvas&gt;
-  <em>Posterization: &lt;input type=&quot;range&quot; min=&quot;1&quot; max=&quot;255&quot; value=&quot;1&quot; /&gt;</em>
+  <em>&lt;br /&gt;Posterization: &lt;input type=&quot;range&quot; id=&quot;inputPoster&quot; min=&quot;1&quot; max=&quot;255&quot; value=&quot;1&quot;/&gt;
+  &lt;br /&gt;Threshold: &lt;input type=&quot;range&quot; id=&quot;inputThresh&quot; min=&quot;1&quot; max=&quot;20&quot; value=&quot;10&quot;/&gt;
+  </em>
 &lt;/body&gt;</code></pre>
 
-We'll take the value of this slider and use it as a parameter to the `paintGrayscale` image:
+We'll parse the values of these sliders in the `paintGrayscale` function, and then use them to modify the "gray" value by adding the following code:
 
-<pre class="delta"><code>function paintGrayscale(<em>threshold</em>) {
-  <em>if (!threshold) {
-    threshold = 1;
-  }</em>
+<pre class="delta"><code>function paintGrayscale() {
+  <em>var poster = parseInt(document.querySelector('#inputPoster').value);
+  var thresh = parseInt(document.querySelector('#inputThresh').value);
+  </em>
   
   var buffer = document.querySelector('#buffer');
   var bufferContext = buffer.getContext('2d');
@@ -359,7 +361,9 @@ We'll take the value of this slider and use it as a parameter to the `paintGrays
     var b = imagedata.data[i + 2];
     
     var gray = (0.3 * r) + (0.59 * g) + (0.11 * b);
-    <em>gray = Math.round(gray / threshold) * threshold;</em>
+    <em>gray = gray * (thresh / 10.0);
+    gray = Math.round(gray / poster) * poster;
+    </em>
     gray = Math.max(Math.min(gray, 255), 0);
     imagedata.data[i] = gray;
     imagedata.data[i + 1] = gray;
@@ -368,10 +372,10 @@ We'll take the value of this slider and use it as a parameter to the `paintGrays
   outputContext.putImageData(imagedata, 0, 0);
 };</code></pre>
 
-Next, listen for changes to the slider, and call `paintGrayscale` with the new value when the user manipulates the control:
+Next, listen for changes to the sliders, and call `paintGrayscale` when the user manipulates the control:
 
 <pre class="delta"><code><em>function onChange(evt) {
-  paintGrayscale(parseInt(this.value));
+  paintGrayscale();
 };</em>
   
 function onLoad(evt) {
@@ -381,8 +385,10 @@ function onLoad(evt) {
   img.addEventListener('load', onImageLoaded, false);
   img.src = imgUrl;
   
-  <em>var input = document.querySelector('input[type="range"]');
-  input.addEventListener('change', onChange, false);</em>
+  <em>var inputs = document.querySelectorAll('input[type="range"]');
+  Array.prototype.forEach.call(inputs, function(input) {
+    input.addEventListener('change', onChange, false);
+  });</em>
 };</code></pre>
 
 Now you're able to offer some customization to your extension!

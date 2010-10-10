@@ -23,11 +23,10 @@
         });
       };
       
-      function paintGrayscale(threshold) {
-        if (!threshold) {
-          threshold = 1;
-        }
-        
+      function paintGrayscale() {
+        var poster = parseInt(document.querySelector('#inputPoster').value);
+        var thresh = parseInt(document.querySelector('#inputThresh').value);
+
         var buffer = document.querySelector('#buffer');
         var bufferContext = buffer.getContext('2d');
         
@@ -36,8 +35,8 @@
         output.width = buffer.width;
         output.height = buffer.height;
         
-        var imagedata = bufferContext.getImageData(0, 0, 
-                                                   buffer.width, buffer.height);
+        var imagedata = bufferContext.getImageData(
+                          0, 0, buffer.width, buffer.height);
             
         for (var i = 0; i < imagedata.data.length; i += 4) {
           var r = imagedata.data[i];
@@ -45,7 +44,8 @@
           var b = imagedata.data[i + 2];
           
           var gray = (0.3 * r) + (0.59 * g) + (0.11 * b);
-          gray = Math.round(gray / threshold) * threshold;
+          gray = gray * (thresh / 10.0);
+          gray = Math.round(gray / poster) * poster;
           gray = Math.max(Math.min(gray, 255), 0);
           imagedata.data[i] = gray;
           imagedata.data[i + 1] = gray;
@@ -67,7 +67,7 @@
       };
       
       function onChange(evt) {
-        paintGrayscale(parseInt(this.value));
+        paintGrayscale();
       };
       
       function onLoad(evt) {
@@ -77,8 +77,11 @@
         img.addEventListener('load', onImageLoaded, false);
         img.src = imgUrl;
         
-        var input = document.querySelector('input[type="range"]');
-        input.addEventListener('change', onChange, false);
+        var inputs = document.querySelectorAll('input[type="range"]');
+        Array.prototype.forEach.call(inputs, function(input) {
+          console.log(input);
+          input.addEventListener('change', onChange, false);
+        });
       };
       
       window.addEventListener('load', onLoad, false);
@@ -87,6 +90,7 @@
   <body>
     <canvas id="buffer"></canvas>
     <canvas id="output"></canvas>
-    Posterization: <input type="range" min="1" max="255" value="1"/>
+    <br />Posterization: <input type="range" id="inputPoster" min="1" max="255" value="1"/>
+    <br />Threshold: <input type="range" id="inputThresh" min="1" max="20" value="10"/>
   </body>
 </html>
